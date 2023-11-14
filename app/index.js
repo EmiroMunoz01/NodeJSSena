@@ -4,7 +4,7 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
+import { methods as authentication } from "./controllers/authentication.controller.js";
 //server
 
 const app = express();
@@ -14,6 +14,7 @@ console.log("Servidor corriendo en puerto", app.get("port"));
 
 //configuracion, asi podremos usar el css
 app.use(express.static(__dirname + "/public"));
+app.use(express.json())
 
 //crearemos las rutas
 
@@ -28,3 +29,8 @@ app.get("/register", (req, res) => {
 app.get("/admin", (req, res) => {
   res.sendFile(__dirname + "/pages/admin/admin.html");
 });
+
+//usaremos una funcion
+app.post("/api/register", authentication.register);
+
+app.post("/api/login", authentication.login);

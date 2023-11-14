@@ -12,6 +12,10 @@ document
       headers:{
         //lo que enviaremos es de tipo JSON, por eso debe tener
         "Content-Type":"application/json"
-      }
+      }, body: JSON.stringify({
+        user: e.target.children.user.value,
+        email: e.target.children.email.value,
+        password: e.target.children.password.value 
+      })
     });
   });
